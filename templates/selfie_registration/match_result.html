@@ -8,6 +8,7 @@
     {% for result in results %}
         <div class="card">
             <img src="{{ result.cropped_face }}" alt="Cropped Face Image" style="width: 100px; height: auto;">
+        <br>{{ result.cropped_face }}
             <div class="match-status" style="background: {% if result.match_result %}red{% else %}green{% endif %}">
                 {{ result.match_result }}
             </div>
