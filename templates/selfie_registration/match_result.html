@@ -1,0 +1,37 @@
+<h1>Find Faces</h1>
+<img src="{{ image }}" alt="Cropped Face Image" style="width: 100px; height: auto;">
+
+
+<h1>Face Matching Results</h1>
+
+<div class="card-grid">
+    {% for result in results %}
+        <div class="card">
+            <img src="{{ result.cropped_face }}" alt="Cropped Face Image" style="width: 100px; height: auto;">
+            <div class="match-status" style="background: {% if result.match_result %}red{% else %}green{% endif %}">
+                {{ result.match_result }}
+            </div>
+            <div class="album-id">{{ result.album_id }}</div>
+        </div>
+    {% endfor %}
+</div>
+
+<style>
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+    }
+
+    .card {
+        border: 1px solid #ccc;
+        padding: 16px;
+        text-align: center;
+    }
+
+    .match-status {
+        color: white;
+        padding: 4px;
+        margin-top: 8px;
+    }
+</style>

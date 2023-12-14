@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css">
+</head>
+<body>
+
+<form action="http://127.0.0.1:8000/photographer/upload_multi_ajax/" class="dropzone" id="myDropzone"></form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+<script>
+    Dropzone.options.myDropzone = {
+        maxFilesize: 5, // Maximum file size in MB
+        acceptedFiles: 'image/*',
+        init: function () {
+            this.on("addedfile", function (file) {
+                if (file.type.match(/image.*/)) {
+                    var reader = new FileReader();
+                    reader.onload = function (event) {
+                        var img = new Image();
+                        img.src = event.target.result;
+
+                        img.onload = function () {
+                            // Check image resolution
+                            if (img.width > 2000 || img.height > 2000) {
+                                resizeImage(file, 2000, 2000);
+                            }
+                        };
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    };
+
+    function resizeImage(file, maxWidth, maxHeight) {
+        var canvas = document.createElement("canvas");
+        var ctx = canvas.getContext("2d");
+
+        var img = new Image();
+        img.src = URL.createObjectURL(file);
+
+        img.onload = function () {
+            var width = img.width;
+            var height = img.height;
+
+            if (width > height) {
+                if (width > maxWidth) {
+                    height *= maxWidth / width;
+                    width = maxWidth;
+                }
+            } else {
+                if (height > maxHeight) {
+                    width *= maxHeight / height;
+                    height = maxHeight;
+                }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+
+            ctx.drawImage(img, 0, 0, width, height);
+
+            canvas.toBlob(function (blob) {
+                // Replace the original file with the resized one
+                var newFile = new File([blob], file.name, { type: file.type, lastModified: Date.now() });
+                file.previewElement.querySelector(".dz-image").src = URL.createObjectURL(newFile);
+                file.upload = { resized: true };
+                this.enqueueFile(newFile);
+            }, file.type);
+        };
+    }
+</script>
+
+</body>
+</html>

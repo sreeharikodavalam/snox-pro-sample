@@ -1,0 +1,16 @@
+{% block content %}
+  <h1>Matched Faces</h1>
+
+  {% if matches %}
+    <ul>
+      {% for match in matches %}
+        <li>
+          <p>Similarity Score: {{ match.similarity_score }}</p>
+          <img src="{{ match.stored_face.image.url }}" alt="Matched Face">
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No matches found.</p>
+  {% endif %}
+{% endblock %}
