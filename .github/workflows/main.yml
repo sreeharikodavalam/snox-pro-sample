@@ -36,4 +36,4 @@ jobs:
       env:
         VULTR_SERVER_IP: "139.84.131.33"
       run: |
-        ssh -i ~/.ssh/vultr_key  root@${VULTR_SERVER_IP} 'bash -s' < deploy_script.sh
+        ssh -i ~/.ssh/vultr_key -o StrictHostKeyChecking=no root@${VULTR_SERVER_IP} 'bash -s' < deploy_script.sh
