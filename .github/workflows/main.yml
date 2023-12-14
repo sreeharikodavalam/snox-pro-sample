@@ -1,23 +1,23 @@
-name: Django CI/CD
-
-on:
-  push:
-    branches:
-      - master
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.12.0
-
+#name: Django CI/CD
+#
+#on:
+#  push:
+#    branches:
+#      - master
+#
+#jobs:
+#  deploy:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - name: Checkout repository
+#      uses: actions/checkout@v2
+#
+#    - name: Set up Python
+#      uses: actions/setup-python@v2
+#      with:
+#        python-version: 3.12.0
+#
 #    - name: Install dependencies
 #      run: |
 #        pip install -r requirements.txt
@@ -25,15 +25,15 @@ jobs:
 #    - name: Run tests
 #      run: |
 #        python manage.py test
-
-    - name: Add private key
-      run: |
-        mkdir -p ~/.ssh
-        echo "$VULTR_SSH_KEY" > ~/.ssh/vultr_key
-        chmod 600 ~/.ssh/vultr_key
-
-    - name: Deploy to Vultr
-      env:
-        VULTR_SERVER_IP: "139.84.131.33"
-      run: |
-        ssh -i ~/.ssh/vultr_key -o StrictHostKeyChecking=no root@${VULTR_SERVER_IP} 'bash -s' < deploy_script.sh
+#
+#    - name: Add private key
+#      run: |
+#        mkdir -p ~/.ssh
+#        echo "$VULTR_SSH_KEY" > ~/.ssh/vultr_key
+#        chmod 600 ~/.ssh/vultr_key
+#
+#    - name: Deploy to Vultr
+#      env:
+#        VULTR_SERVER_IP: "139.84.131.33"
+#      run: |
+#        ssh -i ~/.ssh/vultr_key -o StrictHostKeyChecking=no root@${VULTR_SERVER_IP} 'bash -s' < deploy_script.sh
