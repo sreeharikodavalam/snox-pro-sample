@@ -28,7 +28,7 @@ jobs:
 
     - name: Deploy to Vultr
       env:
-        VULTR_SSH_KEY: ${{ secrets.`VULTR_SSH_KEY` }}
+        VULTR_SSH_KEY: ${{ secrets.VULTR_SSH_KEY }}
         VULTR_SERVER_IP: "139.84.131.33"
       run: |
         ssh -o StrictHostKeyChecking=no -i $VULTR_SSH_KEY root@${VULTR_SERVER_IP} 'bash -s' < deploy_script.sh
