@@ -1,0 +1,18 @@
+# .gitignore
+
+# Virtual environment
+venv/
+
+# Compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# SQLite database file
+db.sqlite3
+
+# Logs and static files
+logs/
+static/
+uploads/
