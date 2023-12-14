@@ -39,7 +39,7 @@ def match_selfies(request, user_selfie_id):
             'album_id': face.album.id,
             'cropped_face': face.image.url,
         })
-    return render(request, 'selfie_registration/match_result.html', {'results': result, 'image': user_selfie.selfie_image.url, 'sample': 'sample_data'})
+    return render(request, 'selfie_registration/match_result.html', {'results': result, 'image': user_selfie.selfie_image.url, 'sample': 'sample_data-'})
 
 
 #
