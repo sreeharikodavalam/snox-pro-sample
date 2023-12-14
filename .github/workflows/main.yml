@@ -30,5 +30,6 @@ jobs:
       env:
         VULTR_SSH_KEY: ${{ secrets.VULTR_SSH_KEY }}
         VULTR_SERVER_IP: "139.84.131.33"
+        SSH_KEY_PATH: ".github/.pk"
       run: |
-        ssh -o StrictHostKeyChecking=no -i $VULTR_SSH_KEY root@${VULTR_SERVER_IP} 'bash -s' < deploy_script.sh
+        ssh -i $SSH_KEY_PATH root@${VULTR_SERVER_IP} 'bash -s' < deploy_script.sh
