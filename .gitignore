@@ -10,6 +10,7 @@ __pycache__/
 *.pyd
 
 # SQLite database file
+deploy_script.sh
 db.sqlite3
 
 # Logs and static files
